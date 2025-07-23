@@ -1,0 +1,35 @@
+.sidebar {
+  width: 250px;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.sidebar h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sidebar li {
+  font-size: 0.9rem;
+  padding: 0.4rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar .up {
+  color: green;
+}
+
+.sidebar .down {
+  color: red;
+}

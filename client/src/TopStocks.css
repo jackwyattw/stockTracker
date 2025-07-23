@@ -30,3 +30,41 @@
   font-size: 1.1rem;
   margin-bottom: 0.75rem;
 }
+
+.top-stock-list {
+  list-style: none;
+  padding: 0;
+}
+
+.stock-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.stock-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 2px;
+}
+
+.up {
+  color: green;
+  margin-left: 10px;
+}
+
+.down {
+  color: red;
+  margin-left: 10px;
+}
+
+.neutral {
+  color: gray;
+  margin-left: 10px;
+}

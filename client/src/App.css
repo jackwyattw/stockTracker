@@ -73,3 +73,49 @@ button:hover {
   font-size: 1.1rem;
   color: #222;
 }
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f7fa;
+}
+
+.container {
+  flex: 1;
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.stock-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.75rem 0;
+}
+
+.stock-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+.trend {
+  margin-left: auto;
+  font-weight: bold;
+}
+
+.trend.up {
+  color: green;
+}
+
+.trend.down {
+  color: red;
+}
