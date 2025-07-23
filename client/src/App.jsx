@@ -1,25 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
+import './TopStocks.css';
 
-const API_KEY = 'ARBKH2BUGQTOTNWY';
+const API_KEY = 'd2059l9r01qmbi8r5u30d2059l9r01qmbi8r5u3g'; // Replace this with your actual key
 
 function App() {
   const [symbol, setSymbol] = useState('');
   const [price, setPrice] = useState(null);
   const [error, setError] = useState('');
+  const [topStocks, setTopStocks] = useState([]);
+
+  const topCompanies = [
+    'AAPL', 'MSFT', 'NVDA', 'GOOGL', 'AMZN',
+    'META', 'TSLA', 'BRK.B', 'UNH', 'LLY'
+  ];
 
   const fetchStockPrice = async () => {
     try {
       const response = await fetch(
-        `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${API_KEY}`
+        `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`
       );
       const data = await response.json();
-      const quote = data["Global Quote"];
-
-      if (quote && quote["05. price"]) {
-        setPrice(quote["05. price"]);
+      if (data && data.c) {
+        setPrice(data.c);
         setError('');
       } else {
         setPrice(null);
@@ -31,21 +34,58 @@ function App() {
     }
   };
 
-  return (
-    <div className="App">
-      <h1>Stock Tracker</h1>
-      <input
-        type="text"
-        value={symbol}
-        onChange={(e) => setSymbol(e.target.value)}
-        placeholder="Enter stock symbol (e.g., AAPL)"
-      />
-      <button onClick={fetchStockPrice}>Get Price</button>
+  useEffect(() => {
+    async function fetchTopStocks() {
+      const results = [];
+      for (let sym of topCompanies) {
+        try {
+          const res = await fetch(
+            `https://finnhub.io/api/v1/quote?symbol=${sym}&token=${API_KEY}`
+          );
+          const data = await res.json();
+          if (data && data.c) {
+            results.push({ symbol: sym, price: data.c });
+          } else {
+            console.warn(`Invalid quote for ${sym}`);
+          }
+        } catch (err) {
+          console.error(`Failed for ${sym}`, err);
+        }
+      }
+      setTopStocks(results);
+    }
 
-      {price && <h2>Current Price: ${parseFloat(price).toFixed(2)}</h2>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    fetchTopStocks();
+  }, []);
+
+  return (
+    <div className="container">
+      <h1>Stock Tracker</h1>
+
+      <div className="search-section">
+        <input
+          type="text"
+          value={symbol}
+          onChange={(e) => setSymbol(e.target.value)}
+          placeholder="Enter stock symbol (e.g., AAPL)"
+        />
+        <button onClick={fetchStockPrice}>Get Price</button>
+        {price && <h2>Current Price: ${parseFloat(price).toFixed(2)}</h2>}
+        {error && <p className="error">{error}</p>}
+      </div>
+
+      <div className="top-stocks">
+        <h2>Top 10 S&P 500 Stocks</h2>
+        <ul>
+          {topStocks.map((stock) => (
+            <li key={stock.symbol}>
+              <strong>{stock.symbol}</strong>: ${parseFloat(stock.price).toFixed(2)}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
-  )
+  );
 }
 
 export default App;

@@ -1,0 +1,32 @@
+
+.search-section {
+  margin-bottom: 2rem;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+}
+
+.top-stocks {
+  margin-top: 2rem;
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.top-stocks h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.top-stocks ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.top-stocks li {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
