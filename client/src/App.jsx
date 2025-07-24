@@ -4,8 +4,7 @@ import './TopStocks.css';
 import './Top100Sidebar.css';
 import Top100Sidebar from './Top100Sidebar';
 
-
-const API_KEY = 'd2059l9r01qmbi8r5u30d2059l9r01qmbi8r5u3g'; 
+const API_KEY = 'd2059l9r01qmbi8r5u30d2059l9r01qmbi8r5u3g'; // Replace this with your real key
 
 function App() {
   const [symbol, setSymbol] = useState('');
