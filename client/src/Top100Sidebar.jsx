@@ -23,10 +23,10 @@ function Top100Sidebar() {
     let index = 0;
     const results = [];
 
-    async function fetchOneAtATime() {
+    const fetchOne = async () => {
       if (index >= top100Symbols.length) return;
-
       const symbol = top100Symbols[index];
+
       try {
         const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`);
         const data = await res.json();
@@ -39,10 +39,10 @@ function Top100Sidebar() {
       }
 
       index++;
-      setTimeout(fetchOneAtATime, 1100); // Wait 1.1s to stay under API limit
-    }
+      setTimeout(fetchOne, 1200); // ~1.2s to be safe
+    };
 
-    fetchOneAtATime();
+    fetchOne();
   }, []);
 
   return (
